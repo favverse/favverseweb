@@ -145,7 +145,7 @@ export default function HeroSection() {
             willChange: 'transform',
           }}
         >
-          Crafting websites that leave a lasting impression.
+          We shape how the world sees your brand.
         </motion.h1>
 
         {/* Subtitle — mid parallax */}

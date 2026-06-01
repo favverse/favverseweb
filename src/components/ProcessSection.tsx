@@ -8,24 +8,28 @@ const steps = [
     number: '01',
     title: 'Discover',
     description: 'Understanding your business, audience, and goals. Deep research, honest conversations, and strategic clarity.',
+    color: 'rgba(180,200,255,0.12)',
   },
   {
     icon: Palette,
     number: '02',
     title: 'Design',
     description: 'Crafting beautiful user experiences and visual systems. Every element considered, every detail intentional.',
+    color: 'rgba(200,180,255,0.12)',
   },
   {
     icon: Code2,
     number: '03',
     title: 'Build',
     description: 'Developing fast, responsive, and reliable websites. Clean code, modern stack, performance first.',
+    color: 'rgba(180,255,220,0.10)',
   },
   {
     icon: BarChart3,
     number: '04',
     title: 'Grow',
     description: 'Helping businesses strengthen their digital presence and visibility. Strategy, SEO, and long-term support.',
+    color: 'rgba(255,220,180,0.10)',
   },
 ]
 
@@ -34,7 +38,7 @@ export default function ProcessSection() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="process" ref={ref} className="section-padding">
+    <section id="process" ref={ref} className="section-padding" style={{ position: 'relative' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -58,19 +62,19 @@ export default function ProcessSection() {
           </h2>
         </motion.div>
 
+        {/* Timeline connector */}
         <div style={{ position: 'relative' }}>
-          {/* Timeline line - desktop */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 1.4, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{
               position: 'absolute',
-              top: '2.5rem',
+              top: '3.5rem',
               left: '12.5%',
               right: '12.5%',
               height: '1px',
-              background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent)',
+              background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.15) 80%, transparent)',
               transformOrigin: 'left',
               zIndex: 0,
             }}
@@ -101,51 +105,91 @@ export default function ProcessSection() {
                     gap: '1.25rem',
                   }}
                 >
-                  {/* Icon circle */}
-                  <motion.div
-                    whileHover={{ scale: 1.08, boxShadow: '0 0 30px rgba(255,255,255,0.08)' }}
-                    style={{
-                      width: '72px',
-                      height: '72px',
-                      borderRadius: '50%',
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      backdropFilter: 'blur(12px)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'rgba(255,255,255,0.8)',
-                      flexShrink: 0,
-                      position: 'relative',
-                      transition: 'box-shadow 0.3s ease',
-                    }}
-                  >
-                    <Icon size={26} strokeWidth={1.4} />
-                    {/* Step number badge */}
-                    <div
+                  {/* Icon circle with pulsing glow */}
+                  <div style={{ position: 'relative' }}>
+                    {/* Pulse ring */}
+                    <motion.div
+                      animate={isInView ? {
+                        scale: [1, 1.35, 1],
+                        opacity: [0.3, 0, 0.3],
+                      } : {}}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: i * 0.5,
+                        ease: 'easeInOut',
+                      }}
                       style={{
                         position: 'absolute',
-                        top: '-4px',
-                        right: '-4px',
-                        width: '20px',
-                        height: '20px',
+                        inset: '-12px',
                         borderRadius: '50%',
-                        background: 'rgba(255,255,255,0.1)',
-                        border: '1px solid rgba(255,255,255,0.15)',
+                        background: step.color,
+                        pointerEvents: 'none',
+                      }}
+                    />
+
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      style={{
+                        width: '72px',
+                        height: '72px',
+                        borderRadius: '50%',
+                        background: 'rgba(255,255,255,0.04)',
+                        border: '1px solid rgba(255,255,255,0.12)',
+                        backdropFilter: 'blur(12px)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontFamily: '"Inter", sans-serif',
-                        fontSize: '0.6rem',
-                        fontWeight: 600,
-                        color: 'rgba(255,255,255,0.6)',
+                        color: 'rgba(255,255,255,0.8)',
+                        position: 'relative',
+                        zIndex: 1,
+                        transition: 'box-shadow 0.3s ease',
+                        boxShadow: `0 0 30px ${step.color}`,
                       }}
                     >
-                      {i + 1}
-                    </div>
-                  </motion.div>
+                      <Icon size={26} strokeWidth={1.4} />
 
-                  <div>
+                      {/* Step number badge */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '-6px',
+                          right: '-6px',
+                          width: '22px',
+                          height: '22px',
+                          borderRadius: '50%',
+                          background: 'rgba(255,255,255,0.08)',
+                          border: '1px solid rgba(255,255,255,0.15)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontFamily: '"Inter", sans-serif',
+                          fontSize: '0.6rem',
+                          fontWeight: 600,
+                          color: 'rgba(255,255,255,0.6)',
+                        }}
+                      >
+                        {i + 1}
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Content card */}
+                  <motion.div
+                    whileHover={{
+                      y: -4,
+                      background: 'rgba(255,255,255,0.04)',
+                      borderColor: 'rgba(255,255,255,0.1)',
+                    }}
+                    style={{
+                      padding: '1.5rem 1.25rem',
+                      background: 'rgba(255,255,255,0.02)',
+                      border: '1px solid rgba(255,255,255,0.06)',
+                      borderRadius: '16px',
+                      transition: 'all 0.25s ease',
+                      width: '100%',
+                    }}
+                  >
                     <h3
                       style={{
                         fontFamily: '"Instrument Serif", Georgia, serif',
@@ -161,14 +205,14 @@ export default function ProcessSection() {
                     <p
                       style={{
                         fontFamily: '"Inter", sans-serif',
-                        fontSize: '0.85rem',
-                        color: 'rgba(255,255,255,0.5)',
+                        fontSize: '0.82rem',
+                        color: 'rgba(255,255,255,0.45)',
                         lineHeight: 1.7,
                       }}
                     >
                       {step.description}
                     </p>
-                  </div>
+                  </motion.div>
                 </motion.div>
               )
             })}
@@ -177,12 +221,18 @@ export default function ProcessSection() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
-          #process .process-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          #process .timeline-line { display: none !important; }
+        @media (max-width: 900px) {
+          #process [style*="grid-template-columns: repeat(4, 1fr)"] {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          #process [style*="top: 3.5rem"] {
+            display: none !important;
+          }
         }
-        @media (max-width: 480px) {
-          #process .process-grid { grid-template-columns: 1fr !important; }
+        @media (max-width: 520px) {
+          #process [style*="grid-template-columns: repeat(4, 1fr)"] {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </section>

@@ -112,6 +112,7 @@ export default function HeroSection() {
           height: '100%',
           objectFit: 'cover',
           zIndex: 0,
+          filter: 'brightness(0.38) saturate(0.8)',
         }}
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
@@ -123,7 +124,7 @@ export default function HeroSection() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'rgba(0,0,0,0.35)',
+          background: 'rgba(0,0,0,0.55)',
           zIndex: 1,
           opacity: 1,
           pointerEvents: 'none',
@@ -135,7 +136,7 @@ export default function HeroSection() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(5,5,5,0.6) 100%)',
+          background: 'radial-gradient(ellipse at center, transparent 20%, rgba(5,5,5,0.75) 100%)',
           zIndex: 2,
           pointerEvents: 'none',
         }}
@@ -146,7 +147,7 @@ export default function HeroSection() {
           bottom: 0,
           left: 0,
           right: 0,
-          height: '30%',
+          height: '40%',
           background: 'linear-gradient(to top, #050505, transparent)',
           zIndex: 2,
           pointerEvents: 'none',

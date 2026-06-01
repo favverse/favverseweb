@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react'
 import './index.css'
 import Preloader from './components/Preloader'
-
+import AmbientBackground from './components/AmbientBackground'
+import MarqueeStrip from './components/MarqueeStrip'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import TrustStrip from './components/TrustStrip'
@@ -26,6 +27,9 @@ export default function App() {
       {/* Subtle noise texture overlay */}
       <div className="noise-overlay" aria-hidden="true" />
 
+      {/* Slowly drifting ambient light blobs */}
+      <AmbientBackground />
+
       {/* Branded preloader */}
       <Preloader onComplete={handlePreloaderComplete} />
 
@@ -41,6 +45,7 @@ export default function App() {
             <Navbar />
             <main>
               <HeroSection />
+              <MarqueeStrip />
               <TrustStrip />
               <IntroSection />
               <ServicesSection />

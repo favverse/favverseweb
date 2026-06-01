@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block build artifacts
+Disallow: /assets/
+
+Sitemap: https://favverse.pages.dev/sitemap.xml

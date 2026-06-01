@@ -81,7 +81,7 @@ export default function Footer() {
             lineHeight: 0.88,
           }}
         >
-          Favverse
+          Favverse.
         </span>
       </motion.div>
     </footer>

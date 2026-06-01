@@ -126,7 +126,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{ y: eyebrowY, opacity: contentOpacity, willChange: 'transform' }}
         >
-          <span className="eyebrow">Premium Digital Studio</span>
+          <span className="eyebrow"> Digital Growth , Designed Beautifully</span>
         </motion.div>
 
         {/* Headline — deepest parallax layer */}

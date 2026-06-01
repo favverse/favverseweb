@@ -127,7 +127,7 @@ function RadarChart({ isInView }: { isInView: boolean }) {
               fontWeight="500"
               letterSpacing="0.08em"
               fill="rgba(255,255,255,0.35)"
-              textTransform="uppercase"
+              style={{ textTransform: 'uppercase' }}
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 1 + i * 0.05, duration: 0.4 }}

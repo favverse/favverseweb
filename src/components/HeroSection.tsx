@@ -54,6 +54,9 @@ export default function HeroSection() {
         playsInline
         preload="auto"
         poster="/videos/hero_poster.jpg"
+        controlsList="nodownload nofullscreen noremoteplayback"
+        disablePictureInPicture
+        onContextMenu={(e) => e.preventDefault()}
         style={{
           position: 'absolute',
           inset: 0,

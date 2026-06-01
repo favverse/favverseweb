@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import './index.css'
 import Preloader from './components/Preloader'
 import AmbientBackground from './components/AmbientBackground'
@@ -20,6 +20,17 @@ export default function App() {
 
   const handlePreloaderComplete = useCallback(() => {
     setPreloaderDone(true)
+  }, [])
+
+  // Disable right-click context menu and drag globally
+  useEffect(() => {
+    const block = (e: Event) => e.preventDefault()
+    document.addEventListener('contextmenu', block)
+    document.addEventListener('dragstart', block)
+    return () => {
+      document.removeEventListener('contextmenu', block)
+      document.removeEventListener('dragstart', block)
+    }
   }, [])
 
   return (

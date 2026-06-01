@@ -24,7 +24,7 @@ export default function ContactSection() {
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const subject = encodeURIComponent('Project Inquiry — Favverse®')
+    const subject = encodeURIComponent('Project Inquiry — Favverse')
     const body = encodeURIComponent(
       `Hello Favverse Team,\n\nI'd like to discuss a project.\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}\n\nLooking forward to hearing from you.`
     )

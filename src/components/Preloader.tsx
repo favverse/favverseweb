@@ -94,8 +94,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
                 lineHeight: 1,
               }}
             >
-              ®
-            </motion.span>
+                          </motion.span>
           </div>
 
           {/* Tagline */}

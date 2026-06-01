@@ -53,6 +53,7 @@ export default function HeroSection() {
         loop
         playsInline
         preload="auto"
+        poster="/videos/hero_poster.jpg"
         style={{
           position: 'absolute',
           inset: 0,

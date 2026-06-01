@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Sparkles, SearchCheck, Zap, Smartphone, Cpu, Headphones } from 'lucide-react'
+import { RevealText, RevealLine, EASE_OUT_EXPO } from './ScrollReveal'
 
 const features = [
   { icon: Sparkles, label: 'Premium Design', desc: 'Crafted to impress' },
@@ -177,24 +178,19 @@ export default function WhyFavverseSection() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
           >
-            <span className="eyebrow">Why Favverse</span>
+            <RevealLine>
+              <span className="eyebrow">Why Favverse</span>
+            </RevealLine>
 
-            <h2
-              style={{
-                fontFamily: '"Instrument Serif", Georgia, serif',
-                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                fontWeight: 400,
-                letterSpacing: '-0.03em',
-                lineHeight: 1.05,
-                color: '#ffffff',
-                marginTop: '1rem',
-                marginBottom: '1.5rem',
-              }}
-            >
-              Designed for growth.
-            </h2>
+            <RevealText
+              text="Designed for growth."
+              as="h2"
+              delay={0.1}
+              stagger={0.07}
+              style={{ fontFamily: '"Instrument Serif", Georgia, serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: '#ffffff', marginTop: '1rem', marginBottom: '1.5rem' }}
+            />
 
             <p
               style={{

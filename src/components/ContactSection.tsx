@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Send, Phone, ArrowRight } from 'lucide-react'
+import { RevealText, RevealLine } from './ScrollReveal'
 
 interface FormState {
   name: string
@@ -66,31 +67,24 @@ export default function ContactSection() {
             transition={{ delay: 0.2, duration: 0.6 }}
             style={{ marginBottom: '3rem', textAlign: 'center' }}
           >
-            <span className="eyebrow">Get In Touch</span>
-            <h2
-              style={{
-                fontFamily: '"Instrument Serif", Georgia, serif',
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                fontWeight: 400,
-                letterSpacing: '-0.03em',
-                lineHeight: 1.05,
-                color: '#ffffff',
-                marginTop: '1rem',
-                marginBottom: '1rem',
-              }}
-            >
-              Let's build something exceptional.
-            </h2>
-            <p
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '1rem',
-                color: 'rgba(255,255,255,0.55)',
-                lineHeight: 1.7,
-              }}
+            <RevealLine delay={0.2}>
+              <span className="eyebrow">Get In Touch</span>
+            </RevealLine>
+            <RevealText
+              text="Let's build something exceptional."
+              as="h2"
+              delay={0.25}
+              stagger={0.05}
+              style={{ fontFamily: '"Instrument Serif", Georgia, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: '#ffffff', marginTop: '1rem', marginBottom: '1rem' }}
+            />
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.55, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              style={{ fontFamily: '"Inter", sans-serif', fontSize: '1rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7 }}
             >
               Tell us about your project and we'll get back to you.
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Form */}

@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Compass, Palette, Code2, BarChart3 } from 'lucide-react'
+import { RevealText, RevealLine, EASE_OUT_EXPO } from './ScrollReveal'
 
 const steps = [
   {
@@ -40,27 +41,18 @@ export default function ProcessSection() {
   return (
     <section id="process" ref={ref} className="section-padding" style={{ position: 'relative' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          style={{ marginBottom: '5rem', textAlign: 'center' }}
-        >
-          <span className="eyebrow">How We Work</span>
-          <h2
-            style={{
-              fontFamily: '"Instrument Serif", Georgia, serif',
-              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-              fontWeight: 400,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.05,
-              color: '#ffffff',
-              marginTop: '1rem',
-            }}
-          >
-            Our Process.
-          </h2>
-        </motion.div>
+        <div style={{ marginBottom: '5rem', textAlign: 'center' }}>
+          <RevealLine>
+            <span className="eyebrow">How We Work</span>
+          </RevealLine>
+          <RevealText
+            text="Our Process."
+            as="h2"
+            delay={0.1}
+            stagger={0.09}
+            style={{ fontFamily: '"Instrument Serif", Georgia, serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: '#ffffff', marginTop: '1rem' }}
+          />
+        </div>
 
         {/* Timeline connector */}
         <div style={{ position: 'relative' }}>
@@ -94,9 +86,9 @@ export default function ProcessSection() {
               return (
                 <motion.div
                   key={step.title}
-                  initial={{ opacity: 0, y: 40 }}
+                  initial={{ opacity: 0, y: 50 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: i * 0.15 + 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  transition={{ duration: 0.8, delay: i * 0.13, ease: EASE_OUT_EXPO }}
                   style={{
                     display: 'flex',
                     flexDirection: 'column',

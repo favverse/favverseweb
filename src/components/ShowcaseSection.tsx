@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { RevealText, RevealLine } from './ScrollReveal'
 
 const showcaseItems = [
   {
@@ -148,20 +149,16 @@ export default function ShowcaseSection() {
           transition={{ duration: 0.7 }}
           style={{ marginBottom: '4rem', textAlign: 'center' }}
         >
-          <span className="eyebrow">Our Work</span>
-          <h2
-            style={{
-              fontFamily: '"Instrument Serif", Georgia, serif',
-              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-              fontWeight: 400,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.05,
-              color: '#ffffff',
-              marginTop: '1rem',
-            }}
-          >
-            What We Create.
-          </h2>
+          <RevealLine>
+            <span className="eyebrow">Our Work</span>
+          </RevealLine>
+          <RevealText
+            text="What We Create."
+            as="h2"
+            delay={0.1}
+            stagger={0.08}
+            style={{ fontFamily: '"Instrument Serif", Georgia, serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: '#ffffff', marginTop: '1rem' }}
+          />
         </motion.div>
 
         <div

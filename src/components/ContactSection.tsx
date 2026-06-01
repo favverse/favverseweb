@@ -287,20 +287,6 @@ export default function ContactSection() {
             >
               contact.favverse@gmail.com
             </a>
-            <a
-              href="tel:+919562099491"
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.875rem',
-                color: 'rgba(255,255,255,0.45)',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
-            >
-              +91 95620 99491
-            </a>
           </motion.div>
           </motion.div>
         </motion.div>

@@ -171,7 +171,7 @@ export default function ShowcaseSection() {
             gap: '1.5rem',
           }}
         >
-          {showcaseItems.map((item, i) => (
+          {showcaseItems.map((item) => (
             <motion.div
               key={item.label}
               initial={{ opacity: 0, y: 40, scale: 0.97 }}

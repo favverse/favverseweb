@@ -77,7 +77,7 @@ export default function IntroSection() {
                 style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem', maxWidth: '700px' }}
               >
                 <p style={{ fontFamily: '"Inter", sans-serif', fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8 }}>
-                  Favverse helps businesses create meaningful digital experiences through thoughtful design, modern development practices, and long-term growth strategies.
+                  Favverse. helps businesses create meaningful digital experiences through thoughtful design, modern development practices, and long-term growth strategies.
                 </p>
                 <p style={{ fontFamily: '"Inter", sans-serif', fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8 }}>
                   We focus on building websites that not only look exceptional but also help businesses establish credibility and connect with their audience.

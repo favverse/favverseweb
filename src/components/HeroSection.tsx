@@ -165,7 +165,7 @@ export default function HeroSection() {
             willChange: 'transform',
           }}
         >
-          Favverse designs modern websites and growth-focused digital experiences that help businesses establish trust, attract customers, and stand out online.
+          Favverse. designs modern websites and growth-focused digital experiences that help businesses establish trust, attract customers, and stand out online.
         </motion.p>
 
         {/* Buttons — shallowest parallax layer */}

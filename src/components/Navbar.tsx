@@ -61,7 +61,7 @@ export default function Navbar() {
               userSelect: 'none',
             }}
           >
-            Favverse<span style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.9em' }}></span>
+            Favverse.
           </a>
 
           {/* Desktop Links */}

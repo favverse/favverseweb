@@ -83,18 +83,21 @@ export default function Preloader({ onComplete }: PreloaderProps) {
               </motion.span>
             ))}
             <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.4 }}
+              initial={{ opacity: 0, y: '100%' }}
+              animate={{ opacity: 1, y: '0%' }}
+              transition={{ delay: letters.length * 0.06 + 0.05, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{
-                fontFamily: '"Instrument Serif", serif',
-                fontSize: 'clamp(1.5rem, 4vw, 3rem)',
-                color: 'rgba(255,255,255,0.35)',
-                marginLeft: '2px',
+                display: 'inline-block',
+                fontFamily: '"Instrument Serif", Georgia, serif',
+                fontSize: 'clamp(3rem, 8vw, 6rem)',
+                fontWeight: 400,
+                color: '#ffffff',
+                letterSpacing: '-0.04em',
                 lineHeight: 1,
               }}
             >
-                          </motion.span>
+              .
+            </motion.span>
           </div>
 
           {/* Tagline */}

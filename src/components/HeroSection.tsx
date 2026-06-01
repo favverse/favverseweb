@@ -1,11 +1,30 @@
 import { useEffect, useRef, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const rafRef = useRef<number>(0)
   const overlayRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  // Parallax scroll transforms
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  })
+
+  const rawEyebrowY = useTransform(scrollYProgress, [0, 1], [0, -40])
+  const rawHeadlineY = useTransform(scrollYProgress, [0, 1], [0, -100])
+  const rawSubY = useTransform(scrollYProgress, [0, 1], [0, -70])
+  const rawBtnsY = useTransform(scrollYProgress, [0, 1], [0, -50])
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+
+  const eyebrowY = useSpring(rawEyebrowY, { stiffness: 80, damping: 20 })
+  const headlineY = useSpring(rawHeadlineY, { stiffness: 80, damping: 20 })
+  const subY = useSpring(rawSubY, { stiffness: 80, damping: 20 })
+  const btnsY = useSpring(rawBtnsY, { stiffness: 80, damping: 20 })
+  const contentOpacity = useSpring(rawOpacity, { stiffness: 80, damping: 20 })
 
   const handleScrollDown = () => {
     const next = document.querySelector('#about')
@@ -68,6 +87,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
+      ref={sectionRef}
       style={{
         position: 'relative',
         width: '100%',
@@ -148,14 +168,17 @@ export default function HeroSection() {
           gap: '2rem',
         }}
       >
+        {/* Eyebrow — slowest parallax layer */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
+          style={{ y: eyebrowY, opacity: contentOpacity, willChange: 'transform' }}
         >
           <span className="eyebrow">Premium Digital Studio</span>
         </motion.div>
 
+        {/* Headline — deepest parallax layer */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -168,11 +191,14 @@ export default function HeroSection() {
             lineHeight: 0.95,
             color: '#ffffff',
             maxWidth: '1100px',
+            y: headlineY,
+            willChange: 'transform',
           }}
         >
           Crafting websites that leave a lasting impression.
         </motion.h1>
 
+        {/* Subtitle — mid parallax */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -184,16 +210,19 @@ export default function HeroSection() {
             color: 'rgba(255,255,255,0.65)',
             maxWidth: '700px',
             lineHeight: 1.75,
+            y: subY,
+            willChange: 'transform',
           }}
         >
           Favverse designs modern websites and growth-focused digital experiences that help businesses establish trust, attract customers, and stand out online.
         </motion.p>
 
+        {/* Buttons — shallowest parallax layer */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.75 }}
-          style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}
+          style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', y: btnsY, willChange: 'transform' }}
         >
           <a
             href="#contact"

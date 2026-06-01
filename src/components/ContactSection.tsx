@@ -36,16 +36,29 @@ export default function ContactSection() {
   return (
     <section id="contact" ref={ref} className="section-padding">
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 1.5rem' }}>
+        {/* Animated gradient border wrapper */}
         <motion.div
-          initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-          animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          whileHover={{
-            boxShadow: '0 20px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)',
+          style={{
+            position: 'relative',
+            borderRadius: '25px',
+            padding: '1px',
+            overflow: 'hidden',
           }}
-          className="glass-card"
-          style={{ padding: 'clamp(2.5rem, 6vw, 5rem)', transition: 'box-shadow 0.4s ease' }}
         >
+          {/* Rotating gradient layer that creates the border */}
+          <div className="contact-gradient-border" />
+
+          {/* Actual card */}
+          <motion.div
+            whileHover={{
+              boxShadow: '0 24px 80px rgba(0,0,0,0.55)',
+            }}
+            className="glass-card"
+            style={{ padding: 'clamp(2.5rem, 6vw, 5rem)', borderRadius: '23px', position: 'relative', zIndex: 1, transition: 'box-shadow 0.4s ease' }}
+          >
           {/* Header */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -295,8 +308,31 @@ export default function ContactSection() {
               +91 95620 99491
             </a>
           </motion.div>
+          </motion.div>
         </motion.div>
       </div>
+
+      <style>{`
+        .contact-gradient-border {
+          position: absolute;
+          inset: -150%;
+          background: conic-gradient(
+            from 0deg at 50% 50%,
+            transparent 0deg,
+            rgba(255, 255, 255, 0.0) 60deg,
+            rgba(255, 255, 255, 0.18) 120deg,
+            rgba(255, 255, 255, 0.0) 180deg,
+            transparent 360deg
+          );
+          animation: spinContactBorder 5s linear infinite;
+          z-index: 0;
+          will-change: transform;
+        }
+        @keyframes spinContactBorder {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+      `}</style>
     </section>
   )
 }

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import './index.css'
 import Preloader from './components/Preloader'
-import CustomCursor from './components/CustomCursor'
+
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import TrustStrip from './components/TrustStrip'
@@ -25,9 +25,6 @@ export default function App() {
     <div style={{ background: '#050505', minHeight: '100vh', overflowX: 'hidden' }}>
       {/* Subtle noise texture overlay */}
       <div className="noise-overlay" aria-hidden="true" />
-
-      {/* Custom cursor — desktop only */}
-      <CustomCursor />
 
       {/* Branded preloader */}
       <Preloader onComplete={handlePreloaderComplete} />

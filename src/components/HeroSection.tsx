@@ -1,11 +1,8 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 
 export default function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const rafRef = useRef<number>(0)
-  const overlayRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
   // Parallax scroll transforms
@@ -14,75 +11,21 @@ export default function HeroSection() {
     offset: ['start start', 'end start'],
   })
 
-  const rawEyebrowY = useTransform(scrollYProgress, [0, 1], [0, -40])
+  const rawEyebrowY  = useTransform(scrollYProgress, [0, 1], [0, -40])
   const rawHeadlineY = useTransform(scrollYProgress, [0, 1], [0, -100])
-  const rawSubY = useTransform(scrollYProgress, [0, 1], [0, -70])
-  const rawBtnsY = useTransform(scrollYProgress, [0, 1], [0, -50])
-  const rawOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  const rawSubY      = useTransform(scrollYProgress, [0, 1], [0, -70])
+  const rawBtnsY     = useTransform(scrollYProgress, [0, 1], [0, -50])
+  const rawOpacity   = useTransform(scrollYProgress, [0, 0.6], [1, 0])
 
-  const eyebrowY = useSpring(rawEyebrowY, { stiffness: 80, damping: 20 })
-  const headlineY = useSpring(rawHeadlineY, { stiffness: 80, damping: 20 })
-  const subY = useSpring(rawSubY, { stiffness: 80, damping: 20 })
-  const btnsY = useSpring(rawBtnsY, { stiffness: 80, damping: 20 })
-  const contentOpacity = useSpring(rawOpacity, { stiffness: 80, damping: 20 })
+  const eyebrowY      = useSpring(rawEyebrowY,  { stiffness: 80, damping: 20 })
+  const headlineY     = useSpring(rawHeadlineY, { stiffness: 80, damping: 20 })
+  const subY          = useSpring(rawSubY,       { stiffness: 80, damping: 20 })
+  const btnsY         = useSpring(rawBtnsY,      { stiffness: 80, damping: 20 })
+  const contentOpacity = useSpring(rawOpacity,   { stiffness: 80, damping: 20 })
 
   const handleScrollDown = () => {
-    const next = document.querySelector('#about')
-    if (next) next.scrollIntoView({ behavior: 'smooth' })
+    document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })
   }
-
-  const runVideoLoop = useCallback(() => {
-    const video = videoRef.current
-    const overlay = overlayRef.current
-    if (!video || !overlay) return
-
-    const duration = video.duration
-    const current = video.currentTime
-    const fadeWindow = 0.5
-
-    if (duration && current < fadeWindow) {
-      const t = current / fadeWindow
-      overlay.style.opacity = String(1 - t * 0.65)
-    } else if (duration && current > duration - fadeWindow) {
-      const t = (duration - current) / fadeWindow
-      overlay.style.opacity = String(1 - t * 0.65)
-    } else {
-      overlay.style.opacity = '0.35'
-    }
-
-    rafRef.current = requestAnimationFrame(runVideoLoop)
-  }, [])
-
-  const handleVideoEnd = useCallback(() => {
-    const video = videoRef.current
-    const overlay = overlayRef.current
-    if (!video || !overlay) return
-
-    overlay.style.transition = 'opacity 0.15s ease'
-    overlay.style.opacity = '1'
-
-    setTimeout(() => {
-      video.currentTime = 0
-      video.play().then(() => {
-        overlay.style.transition = ''
-        rafRef.current = requestAnimationFrame(runVideoLoop)
-      })
-    }, 100)
-  }, [runVideoLoop])
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    video.play().catch(() => {})
-    rafRef.current = requestAnimationFrame(runVideoLoop)
-    video.addEventListener('ended', handleVideoEnd)
-
-    return () => {
-      cancelAnimationFrame(rafRef.current)
-      video.removeEventListener('ended', handleVideoEnd)
-    }
-  }, [runVideoLoop, handleVideoEnd])
 
   return (
     <section
@@ -99,12 +42,17 @@ export default function HeroSection() {
         justifyContent: 'center',
       }}
     >
-      {/* Background Video */}
+      {/*
+        VIDEO — native loop, preload, no JS loop, no CSS filter.
+        will-change: transform forces its own GPU compositing layer
+        so the browser decodes video independently of page paint.
+      */}
       <video
-        ref={videoRef}
         autoPlay
         muted
+        loop
         playsInline
+        preload="auto"
         style={{
           position: 'absolute',
           inset: 0,
@@ -112,35 +60,36 @@ export default function HeroSection() {
           height: '100%',
           objectFit: 'cover',
           zIndex: 0,
-          filter: 'brightness(0.38) saturate(0.8)',
+          willChange: 'transform',
+          transform: 'translateZ(0)',
         }}
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
 
-      {/* Cinematic overlay managed by RAF */}
+      {/* Primary darkening overlay — replaces the expensive CSS filter */}
       <div
-        ref={overlayRef}
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'rgba(0,0,0,0.55)',
+          background: 'rgba(0,0,0,0.68)',
           zIndex: 1,
-          opacity: 1,
           pointerEvents: 'none',
         }}
       />
 
-      {/* Gradient vignette */}
+      {/* Radial vignette */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(ellipse at center, transparent 20%, rgba(5,5,5,0.75) 100%)',
+          background: 'radial-gradient(ellipse at center, transparent 20%, rgba(5,5,5,0.7) 100%)',
           zIndex: 2,
           pointerEvents: 'none',
         }}
       />
+
+      {/* Bottom fade into page background */}
       <div
         style={{
           position: 'absolute',

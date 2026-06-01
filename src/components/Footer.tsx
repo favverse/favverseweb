@@ -74,9 +74,9 @@ export default function Footer() {
             display: 'block',
             fontFamily: '"Instrument Serif", Georgia, serif',
             fontWeight: 400,
-            fontSize: 'clamp(5rem, 19vw, 24rem)',
+            fontSize: 'clamp(5rem, 20vw, 26rem)',
             letterSpacing: '-0.04em',
-            color: 'rgba(255,255,255,0.12)',
+            color: 'rgba(255,255,255,0.80)',
             whiteSpace: 'nowrap',
             lineHeight: 0.88,
           }}

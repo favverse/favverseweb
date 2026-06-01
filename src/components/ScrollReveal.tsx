@@ -1,5 +1,5 @@
-import { useRef, ReactNode } from 'react'
-import { motion, useInView, Variants } from 'framer-motion'
+import { useRef, type ReactNode } from 'react'
+import { motion, useInView, type Variants } from 'framer-motion'
 
 // Snappy expo ease-out — the "premium" easing
 export const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const
@@ -115,47 +115,47 @@ export function RevealText({
   style,
   className,
 }: RevealTextProps) {
-  const ref = useRef<HTMLElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
   const words = text.split(' ')
 
   return (
-    // @ts-ignore - polymorphic ref
-    <Tag
-      ref={ref}
-      className={className}
-      style={{ ...style, overflow: 'hidden', display: 'block' }}
-      aria-label={text}
-    >
-      <span
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '0 0.25em',
-          overflow: 'hidden',
-        }}
+    <div ref={ref}>
+      <Tag
+        className={className}
+        style={{ ...style, overflow: 'hidden', display: 'block' }}
+        aria-label={text}
       >
-        {words.map((word, i) => (
-          <span
-            key={i}
-            style={{ overflow: 'hidden', display: 'inline-block' }}
-          >
-            <motion.span
-              style={{ display: 'inline-block' }}
-              initial={{ y: '110%', opacity: 0 }}
-              animate={isInView ? { y: '0%', opacity: 1 } : { y: '110%', opacity: 0 }}
-              transition={{
-                duration: 0.75,
-                delay: delay + i * stagger,
-                ease: EASE_OUT_EXPO,
-              }}
+        <span
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0 0.25em',
+            overflow: 'hidden',
+          }}
+        >
+          {words.map((word, i) => (
+            <span
+              key={i}
+              style={{ overflow: 'hidden', display: 'inline-block' }}
             >
-              {word}
-            </motion.span>
-          </span>
-        ))}
-      </span>
-    </Tag>
+              <motion.span
+                style={{ display: 'inline-block' }}
+                initial={{ y: '110%', opacity: 0 }}
+                animate={isInView ? { y: '0%', opacity: 1 } : { y: '110%', opacity: 0 }}
+                transition={{
+                  duration: 0.75,
+                  delay: delay + i * stagger,
+                  ease: EASE_OUT_EXPO,
+                }}
+              >
+                {word}
+              </motion.span>
+            </span>
+          ))}
+        </span>
+      </Tag>
+    </div>
   )
 }
 

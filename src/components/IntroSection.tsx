@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { RevealText, RevealLine, Reveal, EASE_OUT_EXPO } from './ScrollReveal'
 
-function AbstractGrid({ isInView }: { isInView: boolean }) {
+function AbstractGrid() {
   return (
     <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"
       style={{ width: '100%', height: '100%', opacity: 0.6 }} aria-hidden="true">
@@ -44,7 +44,7 @@ export default function IntroSection() {
         <Reveal>
           <div className="glass-card" style={{ padding: 'clamp(2.5rem, 6vw, 5rem)', overflow: 'hidden', position: 'relative' }}>
             <div style={{ position: 'absolute', top: 0, right: 0, width: '340px', height: '260px', opacity: 0.5, pointerEvents: 'none' }}>
-              {isInView && <AbstractGrid isInView={isInView} />}
+              {isInView && <AbstractGrid />}
             </div>
 
             <div style={{ position: 'relative', zIndex: 1 }}>
